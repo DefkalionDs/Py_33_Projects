@@ -1,0 +1,154 @@
+# Board
+def board(b_list):
+
+#    print('\n'*100)
+    print('||'+b_list[0]+'||'+b_list[1]+'||'+b_list[2]+'||')
+    print('||~||~||~||')
+    print('||'+b_list[3]+'||'+b_list[4]+'||'+b_list[5]+'||')
+    print('||~||~||~||')
+    print('||'+b_list[6]+'||'+b_list[7]+'||'+b_list[8]+'||')
+
+
+brd_lzt = [' ',' ',' ',' ',' ',' ',' ',' ',' ']
+
+# board(brd_lzt)
+
+# Players input
+
+
+def players_input():
+
+    marker = ''
+    # Ask player one to choose 'X' or 'O'
+    # After p1's choice, the remaining marker is assigned to p2
+
+    while marker != 'X' and marker != 'O':
+
+        marker = input('Player 1, select a marker (X or O): ').upper()
+
+    p1 = marker
+
+    if p1 == 'X':
+        p2 = 'O'
+    else:
+        p2 = 'X'
+
+    return (p1,p2)
+
+
+# players_input()
+
+#print(p1_mrk,p2_mrk)
+
+# Place input into board
+
+def player_choice():
+
+    p1_mrk, p2_mrk = players_input()
+
+    game_on = True
+
+    while game_on:
+
+        if brd_lzt[0] and brd_lzt[1] and brd_lzt[2] and brd_lzt[3] \
+                and brd_lzt[4] and brd_lzt[5] and brd_lzt[6] \
+                and brd_lzt[7] and brd_lzt[8] not in ' ':
+            print('Tie!!')
+
+            return game_on == False
+
+        pos_choice = input('Player 1, select your position in the board (0-8): ')
+
+
+        if pos_choice not in ('0','1','2','3','4','5','6','7','8'):
+            print("Please enter a valid input")
+            continue
+
+        pl1int = int(pos_choice)
+
+        if brd_lzt[pl1int] == p1_mrk or brd_lzt[pl1int] == p2_mrk:
+            print("Cannot overwrite already marked field. Try again")
+            continue
+
+        brd_lzt[pl1int] = p1_mrk
+
+        board(brd_lzt)
+
+        if brd_lzt[0] and brd_lzt[1] and brd_lzt[2] and brd_lzt[3] \
+                and brd_lzt[4] and brd_lzt[5] and brd_lzt[6] \
+                and brd_lzt[7] and brd_lzt[8] not in ' ':
+            print('Tie!!')
+
+            return game_on == False
+
+        elif brd_lzt[0] == brd_lzt[1] == brd_lzt[2] == p1_mrk or \
+            brd_lzt[3] == brd_lzt[4] == brd_lzt[5] == p1_mrk or \
+            brd_lzt[6] == brd_lzt[7] == brd_lzt[8] == p1_mrk:
+            print('Player 1 won!')
+            return game_on == False
+
+        elif brd_lzt[0] == brd_lzt[3] == brd_lzt[6] == p1_mrk or \
+            brd_lzt[1] == brd_lzt[4] == brd_lzt[7] == p1_mrk or \
+            brd_lzt[2] == brd_lzt[5] == brd_lzt[8] == p1_mrk:
+            print('Player 1 won!')
+            return game_on == False
+
+        elif brd_lzt[0] == brd_lzt[4] == brd_lzt[8] == p1_mrk or \
+            brd_lzt[2] == brd_lzt[4] == brd_lzt[7] == p1_mrk:
+            print('Player 1 won!')
+            return game_on == False
+
+        pos_choice = input('Player 2, Select your position in the board (0-8): ')
+
+
+        while pos_choice not in ('0','1','2','3','4','5','6','7','8'):
+            print("Please enter a valid input")
+            pos_choice = input('Player 2, Select your position in the board (0-8): ')
+            continue
+        pl2int = int(pos_choice)
+
+
+        if brd_lzt[pl2int] == p1_mrk or brd_lzt[pl2int] == p2_mrk:
+            print("Cannot overwrite already marked field. Try again")
+            continue
+
+        brd_lzt[pl2int] = p2_mrk
+
+        board(brd_lzt)
+
+        if brd_lzt[0] and brd_lzt[1] and brd_lzt[2] and brd_lzt[3] \
+                and brd_lzt[4] and brd_lzt[5] and brd_lzt[6] \
+                and brd_lzt[7] and brd_lzt[8] not in ' ':
+            print('Tie!!')
+
+            return game_on == False
+
+        elif brd_lzt[0] == brd_lzt[1] == brd_lzt[2] == p2_mrk or \
+            brd_lzt[3] == brd_lzt[4] == brd_lzt[5] == p2_mrk or \
+            brd_lzt[6] == brd_lzt[7] == brd_lzt[8] == p2_mrk:
+            print('Player 2 won!')
+            return game_on == False
+
+        elif brd_lzt[0] == brd_lzt[3] == brd_lzt[6] == p2_mrk or \
+            brd_lzt[1] == brd_lzt[4] == brd_lzt[7] == p2_mrk or \
+            brd_lzt[2] == brd_lzt[5] == brd_lzt[8] == p2_mrk:
+            print('Player 2 won!')
+            return game_on == False
+
+        elif brd_lzt[0] == brd_lzt[4] == brd_lzt[8] == p2_mrk or \
+            brd_lzt[2] == brd_lzt[4] == brd_lzt[7] == p2_mrk:
+            print('Player 2 won!')
+            return game_on == False
+
+
+
+board(brd_lzt)
+#players_input()
+player_choice()
+
+def full_board():
+    if brd_lzt[0] and brd_lzt[1] and brd_lzt[2] and brd_lzt[3] \
+            and brd_lzt[4] and brd_lzt[5] and brd_lzt[6] \
+            and brd_lzt[7] and brd_lzt[8] not in ' ':
+        print('Tie!!')
+
