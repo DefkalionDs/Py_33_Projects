@@ -18,10 +18,12 @@ def load_data(filepath):
     except:
         return {}  # if this file doesn't exist, an empty dictionary will be returned
 
+
 def del_data(filepath):
     with open(filepath, 'r') as f:
         data = json.load(f)
         return data
+
 
 if len(sys.argv) == 2:
     command = sys.argv[1]
