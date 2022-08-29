@@ -48,7 +48,7 @@ def pick_player(p1, p2):
 
     p1 = ''
     p2 = ''
-    marker = ''
+
     while True:
 
         player_choice = input(
