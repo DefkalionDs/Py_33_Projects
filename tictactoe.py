@@ -1,17 +1,16 @@
 import os
 
 
-def greeter():  # !
+def greeter():
     print("T I C T A C T O E\n  W E L C O M E")
     start_key = input('Press any key to continue')
     if start_key == '':
         pass
     else:
         pass
-        # os.system("pause")
 
 
-def play_again():  # !
+def play_again():
     new_game = True
     user_Input = input('Fancy a new game? Y/N\n')
 
@@ -23,20 +22,20 @@ def play_again():  # !
             break
         else:
             print('Please enter a valid input.')
+            user_Input = input().upper()
+    os._exit(1)
 
 
-def full_board(board_list):  # !
-    if board_list[0] and board_list[1] and board_list[2] and board_list[3] \
-            and board_list[4] and board_list[5] and board_list[6] \
-            and board_list[7] and board_list[8] not in ' ':
-        print('Tie!!')
+def full_board(board_list):
 
+    if board_list.count(' ') <= 1:
+        print("Tie!!")
         return True
+    else:
+        return False
 
-    return False
 
-
-def print_board(board_list):  # !
+def print_board(board_list):
     print('\n'*100)
     print('||'+board_list[0]+'||'+board_list[1]+'||'+board_list[2]+'||')
     print('||~||~||~||')
@@ -45,7 +44,7 @@ def print_board(board_list):  # !
     print('||'+board_list[6]+'||'+board_list[7]+'||'+board_list[8]+'||')
 
 
-def pick_player(p1, p2):  # !
+def pick_player(p1, p2):
 
     p1 = ''
     p2 = ''
@@ -74,19 +73,23 @@ def pick_player(p1, p2):  # !
         return p1, p2
 
 
-def game_logic(p1, p2, board_list):  # !
+def game_logic(p1, p2, board_list):
     game_on = True
     while game_on:
 
         pl_pos = input('Player 1, select your position on the board (1-9):\n')
 
-        if pl_pos not in ('1', '2', '3', '4', '5', '6', '7', '8', '9'):
+        while pl_pos not in ('1', '2', '3', '4', '5', '6', '7', '8', '9'):
             print('Please enter a valid input (1-9):\n')
+            pl_pos = input()
+
         else:
             p1_int_pos = int(pl_pos) - 1
 
-        if board_list[p1_int_pos] == p1 or board_list[p1_int_pos] == p2:
-            print("Cannot overwrite already marked field. Try again")
+        while board_list[p1_int_pos] == p1 or board_list[p1_int_pos] == p2:
+            print("Cannot overwrite already marked field. Try again.\n")
+            p1_int_pos = int(input()) - 1
+
         else:
             board_list[p1_int_pos] = p1
 
@@ -113,15 +116,19 @@ def game_logic(p1, p2, board_list):  # !
             break
 
         pl_pos = input(
-            'Player 2, Select your position in the board (0-8): ')
+            'Player 2, Select your position in the board (1-9): ')
 
-        if pl_pos not in ('1', '2', '3', '4', '5', '6', '7', '8', '9'):
+        while pl_pos not in ('1', '2', '3', '4', '5', '6', '7', '8', '9'):
             print('Please enter a valid input (1-9):\n')
+            pl_pos = input()
+
         else:
             p2_int_pos = int(pl_pos) - 1
 
-        if board_list[p2_int_pos] == p1 or board_list[p2_int_pos] == p2:
-            print("Cannot overwrite already marked field. Try again")
+        while board_list[p2_int_pos] == p1 or board_list[p2_int_pos] == p2:
+            print("Cannot overwrite already marked field. Try again.\n")
+            p2_int_pos = int(input()) - 1
+
         else:
             board_list[p2_int_pos] = p2
 
@@ -152,9 +159,10 @@ def game_logic(p1, p2, board_list):  # !
             break
 
 
-def main():  # !
+def main():
     p1 = ''
     p2 = ''
+
     board_list = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ]
 
     p1, p2 = pick_player(p1, p2)
