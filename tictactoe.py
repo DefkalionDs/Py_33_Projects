@@ -93,6 +93,7 @@ def full_board(board_list):
 
 
 def print_board(board_list):
+    
     print('\n'*100)
     print('||'+board_list[0]+'||'+board_list[1]+'||'+board_list[2]+'||')
     print('||~||~||~||')
@@ -166,6 +167,7 @@ def game_logic(p1, p2, board_list):
 
 
 def main():
+    
     p1 = ''
     p2 = ''
     pl_name = ''
