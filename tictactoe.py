@@ -1,7 +1,63 @@
 import os
 
 
+def winner_check(pl_name, pl_choice, board_list):
+
+    if board_list[0] == board_list[1] == board_list[2] == pl_choice or \
+            board_list[3] == board_list[4] == board_list[5] == pl_choice or \
+            board_list[6] == board_list[7] == board_list[8] == pl_choice:
+        print(f'{pl_name} won!')
+        return True
+
+    elif board_list[0] == board_list[3] == board_list[6] == pl_choice or \
+            board_list[1] == board_list[4] == board_list[7] == pl_choice or \
+            board_list[2] == board_list[5] == board_list[8] == pl_choice:
+        print(f'{pl_name} won!')
+        return True
+
+    elif board_list[0] == board_list[4] == board_list[8] == pl_choice or \
+            board_list[2] == board_list[4] == board_list[6] == pl_choice:
+        print(f'{pl_name} won!')
+        return True
+
+
+def player_turns(p1, p2, marker, board_list, pl_pos, game_on):
+
+    if marker.upper() != p1 != p2:
+        pl_name = 'Player 1'
+        marker = p1
+        pl_choice = p1
+    elif marker.upper() != p1:
+        pl_name = 'Player 1'
+        marker = p1
+        pl_choice = p1
+    elif marker.upper() != p2:
+        pl_name = 'Player 2'
+        marker = p2
+        pl_choice = p2
+
+    pl_pos = input(
+        f'{pl_name}, select your position on the board (1-9):\n')
+
+    while pl_pos not in ('1', '2', '3', '4', '5', '6', '7', '8', '9'):
+        print('Please enter a valid input (1-9):\n')
+        pl_pos = input()
+
+    else:
+        pl_int_pos = int(pl_pos) - 1
+
+    while board_list[pl_int_pos] == p1 or board_list[pl_int_pos] == p2:
+        print("Cannot overwrite already marked field. Try again.\n")
+        pl_int_pos = int(input()) - 1
+
+    else:
+        board_list[pl_int_pos] = pl_choice
+
+    print_board(board_list)
+
+
 def greeter():
+    
     print("T I C T A C T O E\n  W E L C O M E")
     start_key = input('Press any key to continue')
     if start_key == '':
@@ -11,6 +67,7 @@ def greeter():
 
 
 def play_again():
+    
     new_game = True
     user_Input = input('Fancy a new game? Y/N\n')
 
@@ -28,7 +85,7 @@ def play_again():
 
 def full_board(board_list):
 
-    if board_list.count(' ') <= 1:
+    if board_list.count(' ') <= 0:
         print("Tie!!")
         return True
     else:
@@ -74,94 +131,45 @@ def pick_player(p1, p2):
 
 
 def game_logic(p1, p2, board_list):
+    
+    marker = ''
+    pl_pos = ''
+    pl_choice = ''
+    pl_name = ''
     game_on = True
     while game_on:
 
-        pl_pos = input('Player 1, select your position on the board (1-9):\n')
+        player_turns(p1, p2, marker, board_list, pl_pos, game_on)
 
-        while pl_pos not in ('1', '2', '3', '4', '5', '6', '7', '8', '9'):
-            print('Please enter a valid input (1-9):\n')
-            pl_pos = input()
-
+        if pl_name == 'Player 1':
+            pl_name = 'Player 2'
         else:
-            p1_int_pos = int(pl_pos) - 1
+            pl_name = 'Player 1'
 
-        while board_list[p1_int_pos] == p1 or board_list[p1_int_pos] == p2:
-            print("Cannot overwrite already marked field. Try again.\n")
-            p1_int_pos = int(input()) - 1
-
+        if pl_choice == p1:
+            pl_choice = p2
         else:
-            board_list[p1_int_pos] = p1
+            pl_choice = p1
 
-        print_board(board_list)
-
-        if board_list[0] == board_list[1] == board_list[2] == p1 or \
-                board_list[3] == board_list[4] == board_list[5] == p1 or \
-                board_list[6] == board_list[7] == board_list[8] == p1:
-            print('Player 1 won!')
-            game_on == False
-            break
-
-        elif board_list[0] == board_list[3] == board_list[6] == p1 or \
-                board_list[1] == board_list[4] == board_list[7] == p1 or \
-                board_list[2] == board_list[5] == board_list[8] == p1:
-            print('Player 1 won!')
-            game_on == False
-            break
-
-        elif board_list[0] == board_list[4] == board_list[8] == p1 or \
-                board_list[2] == board_list[4] == board_list[6] == p1:
-            print('Player 1 won!')
-            game_on == False
-            break
-
-        pl_pos = input(
-            'Player 2, Select your position in the board (1-9): ')
-
-        while pl_pos not in ('1', '2', '3', '4', '5', '6', '7', '8', '9'):
-            print('Please enter a valid input (1-9):\n')
-            pl_pos = input()
-
-        else:
-            p2_int_pos = int(pl_pos) - 1
-
-        while board_list[p2_int_pos] == p1 or board_list[p2_int_pos] == p2:
-            print("Cannot overwrite already marked field. Try again.\n")
-            p2_int_pos = int(input()) - 1
-
-        else:
-            board_list[p2_int_pos] = p2
-
-        print_board(board_list)
-
-        if board_list[0] == board_list[1] == board_list[2] == p2 or \
-                board_list[3] == board_list[4] == board_list[5] == p2 or \
-                board_list[6] == board_list[7] == board_list[8] == p2:
-            print('Player 2 won!')
-            game_on == False
-            break
-
-        elif board_list[0] == board_list[3] == board_list[6] == p2 or \
-                board_list[1] == board_list[4] == board_list[7] == p2 or \
-                board_list[2] == board_list[5] == board_list[8] == p2:
-            print('Player 2 won!')
-            game_on == False
-            break
-
-        elif board_list[0] == board_list[4] == board_list[8] == p2 or \
-                board_list[2] == board_list[4] == board_list[6] == p2:
-            print('Player 2 won!')
-            game_on == False
+        if winner_check(pl_name, pl_choice, board_list):
+            game_on = False
             break
 
         if full_board(board_list):
             game_on = False
             break
 
+        if marker == p1:
+            marker = p2
+        else:
+            marker = p1
+
 
 def main():
     p1 = ''
     p2 = ''
+    pl_name = ''
+    pl_choice = ''
 
     board_list = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ]
 
