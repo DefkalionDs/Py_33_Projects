@@ -170,9 +170,6 @@ def main():
     
     p1 = ''
     p2 = ''
-    pl_name = ''
-    pl_choice = ''
-
     board_list = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ]
 
     p1, p2 = pick_player(p1, p2)
