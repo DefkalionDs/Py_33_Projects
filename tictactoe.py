@@ -21,7 +21,7 @@ def winner_check(pl_name, pl_choice, board_list):
         return True
 
 
-def player_turns(p1, p2, marker, board_list, pl_pos, game_on):
+def player_turns(p1, p2, marker, board_list, pl_pos):
 
     if marker.upper() != p1 != p2:
         pl_name = 'Player 1'
@@ -140,7 +140,7 @@ def game_logic(p1, p2, board_list):
     game_on = True
     while game_on:
 
-        player_turns(p1, p2, marker, board_list, pl_pos, game_on)
+        player_turns(p1, p2, marker, board_list, pl_pos)
 
         if pl_name == 'Player 1':
             pl_name = 'Player 2'
