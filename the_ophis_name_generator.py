@@ -12,8 +12,6 @@ first_name_f_db = ['Mangela', 'Bam', 'Kally', 'Harin',
 last_name_f_db = ['Artin', 'Peesly', 'Hlax', 'Malmer',
                   'Kepoor', 'Nertram', 'Ennon', 'Kilipelli', 'Phyll']
 
-# APP_ICON = pygame.image.load(os.path.join('Assets', 'ophis.png'))
-# pygame.display.set_icon(APP_ICON)
 BG_MUSIC = pygame.mixer.Sound(os.path.join('Assets', 'Ophis.wav'))
 
 
@@ -42,9 +40,6 @@ def gender_naming():
     gender = input(
         'Please choose your gender (M for male, F for female)\n')
     while namer_on:
-
-        # gender = input(
-        #     'Please choose your gender (M for male, F for female)\n')
 
         if gender.upper() == 'QUIT':
             print('Thank you for playing!!')
